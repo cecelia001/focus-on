@@ -53,7 +53,24 @@ function TodayTask(props) {
   }
 
   async function updateTask(id) {
-    console.log(id);
+    let completedTask = {
+      completed: 1,
+    };
+    let options = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify(completedTask),
+    };
+    try {
+      let response = await fetch(`/tasks/${id}/completed`, options);
+      if (response.ok) {
+        props.updateDataCb();
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
   }
 
   async function deleteTask(id) {
@@ -112,7 +129,7 @@ function TodayTask(props) {
                 onChange={handleChange}
               />
             </label>
-            <Button>Add To Do</Button>
+            <Button type="submit">Add To Do</Button>
           </form>
         </div>
       </Container>

@@ -70,4 +70,28 @@ router.delete("/:id", async function (req, res, next) {
   }
 });
 
+// UPDATE completed in task
+
+router.patch("/:id/completed", async function (req, res, next) {
+  const taskId = req.params.id;
+  const changes = req.body;
+  try {
+    await db(
+      `UPDATE tasks SET completed=${changes.completed} WHERE id=${taskId}`
+    );
+    let updatedTask = await db(`SELECT * FROM tasks WHERE id=${taskId}`);
+    res.status(201).send(updatedTask.data);
+    // let originalInformation = await db(
+    //   `SELECT * FROM tasks WHERE id=${taskId}`
+    // );
+
+    // let originalTask = originalInformation.data;
+    // let modifiedTask = originalTask;
+    // modifiedTask[0]["completed"] = changes.completed;
+    // res.status(201).send(modifiedTask);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
 module.exports = router;

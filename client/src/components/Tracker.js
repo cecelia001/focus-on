@@ -10,10 +10,10 @@ function Tracker(props) {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
 
-    if (minutes < 1500) {
+    if (minutes < 10) {
       minutes = "0" + minutes;
     }
-    if (seconds < 1500) {
+    if (seconds < 10) {
       seconds = "0" + seconds;
     }
 
@@ -102,7 +102,7 @@ function Tracker(props) {
         <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
         <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
       </ul>
-      <CircularProgress value={(time / 1500) * 1500} color="grey" size="xs">
+      <CircularProgress value={(time / 1500) * 100} color="grey" size="xs">
         <CircularProgressLabel fontSize="large">
           {printTime()} Minutes
         </CircularProgressLabel>
