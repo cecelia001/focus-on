@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import { ChakraProvider } from "@chakra-ui/react";
+
+import CurrentDay from "./components/CurrentDay";
+import Overview from "./components/Overview";
+import Error404View from "./components/Error404View";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Overview />} />
+          <Route path="/focus/:id" element={<CurrentDay />} />
+          <Route path="*" element={<Error404View />} />
+        </Routes>
+      </div>
+    </ChakraProvider>
   );
 }
 

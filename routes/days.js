@@ -6,14 +6,62 @@ const db = require("../model/helper");
 
 router.get("/", async function (req, res, next) {
   try {
-    let days = await db("SELECT * FROM days;");
-    res.send(days.data);
+    let daysData = [];
+
+    let results = await db("SELECT * FROM days;");
+    let days = results.data;
+
+    for (let date of days) {
+      let taskResults = await db(`SELECT * FROM tasks WHERE day_id=${date.id}`);
+      let tasks = taskResults.data;
+
+      let pomodoroResults = await db(
+        `SELECT * from pomodoro WHERE day_id=${date.id}`
+      );
+      let pomodoro = pomodoroResults.data;
+
+      // build days object with all corresponding data
+
+      date["tasks"] = tasks;
+      date["sessions"] = pomodoro;
+
+      daysData.push(date);
+      // Alternative code: daysData.push({ ...date, tasks: tasks, sessions: pomodoro });
+    }
+
+    res.send(daysData);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 });
 
 // GET day
+
+// router.get("/:date", async function (req, res, next) {
+//   let dayDate = req.params.date;
+//   try {
+//     let results = await db(`SELECT * FROM days WHERE date="${dayDate}"`);
+//     // days is an object
+//     let days = results.data;
+//     let dayId = days[0]["id"];
+//     if (days.length === 0) {
+//       res.status(404).send({ error: "Day not found" });
+//     } else {
+//       //fetch remaining data: tasks
+//       let taskResults = await db(`SELECT * FROM tasks WHERE day_id=${dayId}`);
+//       // taskResults is an array with an object inside that gets added to days object
+//       days[0]["tasks"] = taskResults.data;
+//       //fetch remaining data: pomodoros
+//       let pomodoroResult = await db(
+//         `SELECT * FROM pomodoro WHERE day_id=${dayId}`
+//       );
+//       days[0]["sessions"] = pomodoroResult.data;
+//       res.send(days[0]);
+//     }
+//   } catch (err) {
+//     res.status(500).send({ error: err.message });
+//   }
+// });
 
 router.get("/:id", async function (req, res, next) {
   let dayId = req.params.id;
@@ -52,7 +100,6 @@ router.post("/", async function (req, res, next) {
   try {
     let day = `SELECT * FROM days WHERE date="${today}"`;
     let dayExist = await db(day);
-    console.log(dayExist.data);
     if (dayExist.data.length !== 0) {
       res.send({ error: "Day already exists." });
     } else {
