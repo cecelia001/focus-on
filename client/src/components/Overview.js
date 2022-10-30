@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 
 import DayCard from "./DayCard";
+import AddDay from "./AddDay";
 
 function Overview(props) {
   let [overviewData, setOverviewData] = useState([]);
@@ -31,7 +32,6 @@ function Overview(props) {
       {/* overviewData is an empty array before getOverviewData() executes.
       If overviewData gets passed to DayCard before the data from the asynchronous function has arrived, it will be undefined.
       Therefore, either: overviewData && DayCard (DayCard will only render when condition is truthy) or as below: */}
-      {/* <Box bg="grey"> */}
       {overviewData.map((element) => {
         return (
           <Box bg="grey" p={4} borderWidth="1px" borderRadius="1g">
@@ -39,7 +39,7 @@ function Overview(props) {
           </Box>
         );
       })}
-      {/* </Box> */}
+      <AddDay overviewData={overviewData} />
     </div>
   );
 }

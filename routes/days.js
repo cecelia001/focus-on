@@ -105,7 +105,7 @@ router.post("/", async function (req, res, next) {
     } else {
       await db(`INSERT INTO days (date)
       VALUES ("${today}")`);
-      let result = await db(`SELECT * FROM days`);
+      let result = await db(`SELECT * FROM days WHERE date="${today}"`);
       let days = result.data;
       res.status(201).send(days);
     }
