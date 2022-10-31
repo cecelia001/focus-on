@@ -102,7 +102,7 @@ function Tracker(props) {
         <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
         <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
       </ul>
-      <CircularProgress value={(time / 1500) * 100} color="grey" size="xs">
+      <CircularProgress value={(time / 1500) * 100} color="#FFCACA" size="xs">
         <CircularProgressLabel fontSize="large">
           {printTime()} Minutes
         </CircularProgressLabel>

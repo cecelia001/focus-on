@@ -1,27 +1,11 @@
 import React from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { Grid, GridItem } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 function AddDay(props) {
   const navigate = useNavigate();
-  // Check if current day already exists in db
-  // If true, disable button (can't add day twice)
-  // If false, add new day is possible
-  function checkDate() {
-    let getDay = new Date();
-    var dd = String(getDay.getDate()).padStart(2, "0");
-    var mm = String(getDay.getMonth() + 1).padStart(2, "0");
-    var yyyy = getDay.getFullYear();
-    let today = dd + "." + mm + "." + yyyy;
-    const found = props.overviewData.findIndex(function (element) {
-      return element.date === today;
-    });
-    if (found === -1) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   async function insertDay() {
     let options = {
@@ -46,10 +30,35 @@ function AddDay(props) {
   }
 
   return (
-    <div>
-      <h2>Hello</h2>
-      {!checkDate() && <Button onClick={insertDay}>Add new day</Button>}
-    </div>
+    <Grid
+      w="50%"
+      h="250"
+      mt={5}
+      mb={10}
+      ml={10}
+      borderWidth="2px"
+      borderRadius={"lg"}
+      borderColor={"#FFECEF"}
+    >
+      <GridItem color="#FFECEF" p={5}>
+        <Text textAlign="left" fontSize="xl">
+          There is no entry for today!
+        </Text>
+        <Text textAlign="left" fontSize="lgS">
+          Do you want to plan your day and increase productivity?
+        </Text>
+      </GridItem>
+      <GridItem textAlign="left" p={5}>
+        <Button
+          bg="#FFCACA"
+          color="#372948"
+          _hover={{ background: "#FFECEF" }}
+          onClick={insertDay}
+        >
+          Yes! Plan new day!
+        </Button>
+      </GridItem>
+    </Grid>
   );
 }
 

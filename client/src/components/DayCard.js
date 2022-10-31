@@ -1,6 +1,10 @@
 import React from "react";
+import { GridItem, Text } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function DayCard(props) {
+  const navigate = useNavigate();
   let completedTasks = 0;
   let tasks = props.overviewData.tasks;
 
@@ -13,28 +17,53 @@ function DayCard(props) {
       }
     }
     if (completedTasks === 0) {
-      return <h3>No completed tasks for this day</h3>;
+      return <Text>No completed tasks for this day</Text>;
     } else {
-      return <h3>Number of completed tasks: {completedTasks}</h3>;
+      return <Text>Number of completed tasks: {completedTasks}</Text>;
     }
   }
 
   function isSuccess() {
     if (completedTasks === tasks.length) {
-      return <h3>Success: YES!</h3>;
+      return (
+        <Text>
+          Success: YES! <br></br>
+          <span style={{ fontSize: "2.5rem" }}>👏</span>
+        </Text>
+      );
     } else {
-      return <h3>Success: No</h3>;
+      return <Text>Success: No</Text>;
     }
   }
 
+  function changeView() {
+    navigate(linkToFocusView);
+  }
+
   return (
-    <div>
-      <h3>{props.overviewData.date}</h3>
-      {getCompletedTasks()}
-      <h3>Pomodoro sessions: {props.overviewData.sessions.length}</h3>
-      {isSuccess()}
-      <a href={linkToFocusView}>Link to focus view </a>
-    </div>
+    <GridItem
+      w="100%"
+      h="200"
+      bg="#FFECEF"
+      color="#372948"
+      borderRadius="lg"
+      borderWidth="medium"
+      borderColor="#FFCACA"
+      cursor="pointer"
+      onClick={changeView}
+      _hover={{
+        transform: "scale(1.05)",
+        transition: "all 200ms ease",
+        boxShadow: "red-lg",
+      }}
+    >
+      <Container mt={8}>
+        <Text>{props.overviewData.date}</Text>
+        {getCompletedTasks()}
+        <Text>Pomodoro sessions: {props.overviewData.sessions.length}</Text>
+        {isSuccess()}
+      </Container>
+    </GridItem>
   );
 }
 
