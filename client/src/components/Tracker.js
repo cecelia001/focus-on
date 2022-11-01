@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
-import { Button, ButtonGroup, Container, Text } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
+
 import {
-  List,
+  CircularProgress,
+  CircularProgressLabel,
+  Button,
+  Container,
+  Text,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
+  IconButton,
 } from "@chakra-ui/react";
 import {
   Popover,
@@ -20,12 +21,17 @@ import {
   PopoverCloseButton,
   PopoverAnchor,
 } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
+
 import { InfoOutlineIcon } from "@chakra-ui/icons";
+import clicksound from "../assets/clicksound.mp3";
 
 function Tracker(props) {
   let [time, setTime] = useState(1500);
   let [intervalId, setIntervalId] = useState(null);
+
+  function play() {
+    new Audio(clicksound).play();
+  }
 
   function printTime() {
     let minutes = Math.floor(time / 60);
@@ -73,9 +79,10 @@ function Tracker(props) {
           console.log(`Network error: ${err.message}`);
         }
       }
-
-      sendNewSession();
       // force refetch from parent
+      sendNewSession();
+
+      play();
     }
   }, [props, time, intervalId]);
 
@@ -85,6 +92,7 @@ function Tracker(props) {
         setTime((time) => time - 1);
       }, 1500);
       setIntervalId(() => intervalId);
+      play();
     }
     console.log(props.sessions);
   }
@@ -121,6 +129,7 @@ function Tracker(props) {
       borderWidth={1}
       borderColor="#F2D1D1"
       borderRadius={"2xl"}
+      height="550px"
     >
       <Container>
         <Text fontSize="xl" mb={0} mt={5}>

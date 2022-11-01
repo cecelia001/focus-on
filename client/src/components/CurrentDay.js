@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import { Text, Button, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
+
 import TodayTask from "./TodayTask";
 import Tracker from "./Tracker";
-import { Container, Text, Button } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
-import { SimpleGrid } from "@chakra-ui/react";
 
 function CurrentDay(props) {
   let { id } = useParams();

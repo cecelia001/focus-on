@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Text } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
-import { CheckIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Grid, GridItem, Box } from "@chakra-ui/react";
+
 import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
+  Container,
+  Text,
+  Input,
+  Button,
+  IconButton,
+  Box,
+  Textarea,
 } from "@chakra-ui/react";
 import {
   Accordion,
@@ -20,7 +16,7 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import { Textarea } from "@chakra-ui/react";
+import { CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 
 const INIT_STATE = {
   todo: "",

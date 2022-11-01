@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Grid, GridItem } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
+
+import { Button, Grid, GridItem, Text } from "@chakra-ui/react";
 
 function AddDay(props) {
   const navigate = useNavigate();

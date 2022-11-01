@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
+
+import { SimpleGrid, Grid, GridItem, Text } from "@chakra-ui/react";
 
 import DayCard from "./DayCard";
 import AddDay from "./AddDay";
