@@ -49,7 +49,7 @@ function Overview(props) {
     <div>
       <Grid templateColumns="1">
         <GridItem color="#FFECEF" fontWeight="bold" justifySelf="end" mr={10}>
-          <Text fontSize="6xl">FocusON</Text>
+          <Text fontSize="6xl">Focus:ON</Text>
         </GridItem>
       </Grid>
       {overviewData && !checkDate() && <AddDay overviewData={overviewData} />}
@@ -64,12 +64,5 @@ function Overview(props) {
     </div>
   );
 }
-
-// bg={
-//   element.tasks.reduce(acc, element.tasks.completed) ===
-//   element.tasks.length
-//     ? "blue.500"
-//     : "tomato"
-// }
 
 export default Overview;

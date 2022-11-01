@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import TodayTask from "./TodayTask";
 import Tracker from "./Tracker";
-import { Container } from "@chakra-ui/react";
+import { Container, Text, Button } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 
 function CurrentDay(props) {
   let { id } = useParams();
@@ -30,23 +32,48 @@ function CurrentDay(props) {
 
   return (
     <div>
-      <Container p="6">
-        <h2>Current Day Component</h2>
-      </Container>
-      <Link to="/">Go back to overview</Link>
+      <Grid templateColumns="1">
+        <GridItem color="#FFECEF" justifySelf="end" mr={10} mb={2}>
+          <Text fontSize="6xl" fontWeight="bold">
+            Focus:ON
+          </Text>
+        </GridItem>
+      </Grid>
+      <Grid>
+        <GridItem mb={8}>
+          <Text color="#FFECEF" fontSize="3xl">
+            Focus Dashboard: {currentDayData.date}
+          </Text>
+        </GridItem>
+      </Grid>
+      <SimpleGrid columns={{ sm: 1, md: 2 }}>
+        {currentDayData.tasks && (
+          <TodayTask
+            currentDayData={currentDayData}
+            updateDataCb={getCurrentDayData}
+          />
+        )}
 
-      {currentDayData.tasks && (
-        <TodayTask
-          currentDayData={currentDayData}
+        <Tracker
+          dayId={currentDayData.id}
+          sessions={currentDayData.sessions}
           updateDataCb={getCurrentDayData}
         />
-      )}
-
-      <Tracker
-        dayId={currentDayData.id}
-        sessions={currentDayData.sessions}
-        updateDataCb={getCurrentDayData}
-      />
+      </SimpleGrid>
+      <Button
+        borderWidth={1}
+        borderColor="#FFECEF"
+        borderRadius={"lg"}
+        bg="#251B37"
+        color="#FFCACA"
+        _hover={{ background: "#372948" }}
+        mt={4}
+        mb={4}
+        p={6}
+        fontSize="lg"
+      >
+        <Link to="/">Go back to overview</Link>
+      </Button>
     </div>
   );
 }

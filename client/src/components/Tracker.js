@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button, ButtonGroup, Container, Text } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+} from "@chakra-ui/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 function Tracker(props) {
   let [time, setTime] = useState(1500);
@@ -88,43 +109,107 @@ function Tracker(props) {
     } else if (props.sessions.length === 1) {
       return <h4>You have completed one session today.</h4>;
     } else {
-      return <h4>You have completed {props.sessions.length} sessions.</h4>;
+      return (
+        <h4>You have completed {props.sessions.length} sessions today.</h4>
+      );
     }
   }
 
   return (
-    <div>
-      <h4>Pomodoro Tracker</h4>
-      <h3>Instructions</h3>
-      <ul>
-        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
-        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
-        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
-        <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</li>
-      </ul>
-      <CircularProgress value={(time / 1500) * 100} color="#FFCACA" size="xs">
-        <CircularProgressLabel fontSize="large">
-          {printTime()} Minutes
-        </CircularProgressLabel>
-      </CircularProgress>
-      <Button isDisabled={time < 1500} onClick={startTimer} colorScheme="blue">
-        Start
-      </Button>
-      {time < 1500 && (
-        <Button
-          onClick={intervalId ? pauseTimer : startTimer}
-          colorScheme="blue"
+    <Container
+      color="#FFECEF"
+      borderWidth={1}
+      borderColor="#F2D1D1"
+      borderRadius={"2xl"}
+    >
+      <Container>
+        <Text fontSize="xl" mb={0} mt={5}>
+          Pomodoro Tracker
+        </Text>
+
+        <Container>
+          <Popover>
+            <PopoverTrigger>
+              <IconButton
+                aria-label="Information"
+                icon={<InfoOutlineIcon />}
+                bg="#251B37"
+                color="#FFCACA"
+                size="lg"
+              />
+            </PopoverTrigger>
+            <PopoverContent bg="#372948" textAlign={"left"}>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>Instructions</PopoverHeader>
+              <PopoverBody>
+                <UnorderedList>
+                  <ListItem>
+                    Start the timer and focus for 25 minutes on one of today's
+                    tasks
+                  </ListItem>
+                  <ListItem>Don't procrastinate during that time</ListItem>
+                  <ListItem>Reset timer if you don't concentrate</ListItem>
+                  <ListItem>
+                    Use timeout button for smaller breaks, like accepting a
+                    package
+                  </ListItem>
+                </UnorderedList>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        </Container>
+      </Container>
+
+      <Container>
+        <CircularProgress
+          mt={0}
+          value={(time / 1500) * 100}
+          color="#F2D1D1"
+          size="xs"
         >
-          {intervalId ? "Timeout" : "Continue"}
+          <CircularProgressLabel fontSize="large">
+            {printTime()} Minutes
+          </CircularProgressLabel>
+        </CircularProgress>
+      </Container>
+      <Container mt={5}>
+        <Button
+          isDisabled={time < 1500}
+          onClick={startTimer}
+          bg="#FFCACA"
+          color="#372948"
+          mr={2}
+          _hover={{ background: "#FFECEF" }}
+        >
+          Start
         </Button>
-      )}
-      {time < 1500 && (
-        <Button onClick={resetTimer} colorScheme="blue">
-          Reset
-        </Button>
-      )}
-      {printSessions()}
-    </div>
+        {time < 1500 && (
+          <Button
+            onClick={intervalId ? pauseTimer : startTimer}
+            mr={2}
+            bg="#FFCACA"
+            color="#372948"
+            _hover={{ background: "#FFECEF" }}
+          >
+            {intervalId ? "Timeout" : "Continue"}
+          </Button>
+        )}
+        {time < 1500 && (
+          <Button
+            onClick={resetTimer}
+            bg="#FFCACA"
+            color="#372948"
+            _hover={{ background: "#FFECEF" }}
+          >
+            Reset
+          </Button>
+        )}
+      </Container>
+      <Container fontSize={"lg"} mt={4}>
+        {printSessions()}
+      </Container>
+    </Container>
   );
 }
 

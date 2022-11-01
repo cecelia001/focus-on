@@ -32,7 +32,7 @@ function AddDay(props) {
   return (
     <Grid
       w="50%"
-      h="250"
+      h="200"
       mt={5}
       mb={10}
       ml={10}

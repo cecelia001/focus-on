@@ -1,9 +1,26 @@
 import React, { useState } from "react";
-import { Container } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { Container, Text } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { CheckIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Grid, GridItem, Box } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+} from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
+import { Textarea } from "@chakra-ui/react";
 
 const INIT_STATE = {
   todo: "",
@@ -90,50 +107,98 @@ function TodayTask(props) {
   }
 
   return (
-    <div>
-      <Container p="6">
-        <div>
-          <h4>List of tasks</h4>
-          {props.currentDayData.tasks.map((element) => (
-            <li key={element.id}>
-              {element.title}
-              <Button onClick={() => updateTask(element.id)}>Done</Button>
-              <IconButton
-                aria-label="Delete task"
-                icon={<DeleteIcon />}
-                onClick={() => deleteTask(element.id)}
-              />
-            </li>
-          ))}
-        </div>
+    <Container color="#FFECEF">
+      <Container>
+        <Text fontSize="xl" mb={5}>
+          Today's Tasks:
+        </Text>
       </Container>
+
+      <Accordion allowToggle>
+        {props.currentDayData.tasks.map((element) => (
+          <AccordionItem key={element.id}>
+            <h2>
+              <AccordionButton>
+                <Box
+                  flex="1"
+                  textAlign="left"
+                  textDecoration={
+                    element.completed === 1 ? "line-through" : null
+                  }
+                >
+                  {element.title}
+                </Box>
+
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4} textAlign={"left"} bg={"#372948"}>
+              {element.description}
+              <br></br>
+              <Container display={"flex"} justifyContent={"flex-end"}>
+                <IconButton
+                  aria-label="Mark task as done"
+                  icon={<CheckIcon />}
+                  m={2}
+                  bg="#FFCACA"
+                  color="#372948"
+                  size={"xs"}
+                  _hover={{ background: "#FFECEF" }}
+                  onClick={() => updateTask(element.id)}
+                />
+                <IconButton
+                  aria-label="Delete task"
+                  icon={<DeleteIcon />}
+                  bg="#FFCACA"
+                  m={2}
+                  color="#372948"
+                  size={"xs"}
+                  _hover={{ background: "#FFECEF" }}
+                  onClick={() => deleteTask(element.id)}
+                />
+              </Container>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
+
       <Container p="6">
-        <div>
-          <h4>Add a task:</h4>
-          <form onSubmit={handleSubmit}>
-            <label>
-              To Do:
-              <Input
-                type="text"
-                name="todo"
-                value={inputData.todo}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Describe To Do:
-              <Input
-                type="text"
-                name="description"
-                value={inputData.description}
-                onChange={handleChange}
-              />
-            </label>
-            <Button type="submit">Add To Do</Button>
-          </form>
-        </div>
+        <Text fontSize="lg" m={2}>
+          New To-Do
+        </Text>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Task:
+            <Input
+              m={2}
+              type="text"
+              name="todo"
+              value={inputData.todo}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <Textarea
+              m={2}
+              type="text"
+              name="description"
+              value={inputData.description}
+              onChange={handleChange}
+            />
+          </label>
+          <Button
+            m={2}
+            bg="#FFCACA"
+            color="#372948"
+            _hover={{ background: "#FFECEF" }}
+            type="submit"
+          >
+            Add
+          </Button>
+        </form>
       </Container>
-    </div>
+    </Container>
   );
 }
 

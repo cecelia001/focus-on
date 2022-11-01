@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Container, Text } from "@chakra-ui/react";
 import "@fontsource/ubuntu/300.css";
 import "@fontsource/ubuntu/500.css";
 import theme from "./theme";
@@ -19,6 +20,9 @@ function App() {
           <Route path="/focus/:id" element={<CurrentDay />} />
           <Route path="*" element={<Error404View />} />
         </Routes>
+        <Container>
+          <Text color="#FFECEF">Made with ❤️ by Lea Pipo</Text>
+        </Container>
       </div>
     </ChakraProvider>
   );
