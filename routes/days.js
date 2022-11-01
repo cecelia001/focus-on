@@ -37,32 +37,6 @@ router.get("/", async function (req, res, next) {
 
 // GET day
 
-// router.get("/:date", async function (req, res, next) {
-//   let dayDate = req.params.date;
-//   try {
-//     let results = await db(`SELECT * FROM days WHERE date="${dayDate}"`);
-//     // days is an object
-//     let days = results.data;
-//     let dayId = days[0]["id"];
-//     if (days.length === 0) {
-//       res.status(404).send({ error: "Day not found" });
-//     } else {
-//       //fetch remaining data: tasks
-//       let taskResults = await db(`SELECT * FROM tasks WHERE day_id=${dayId}`);
-//       // taskResults is an array with an object inside that gets added to days object
-//       days[0]["tasks"] = taskResults.data;
-//       //fetch remaining data: pomodoros
-//       let pomodoroResult = await db(
-//         `SELECT * FROM pomodoro WHERE day_id=${dayId}`
-//       );
-//       days[0]["sessions"] = pomodoroResult.data;
-//       res.send(days[0]);
-//     }
-//   } catch (err) {
-//     res.status(500).send({ error: err.message });
-//   }
-// });
-
 router.get("/:id", async function (req, res, next) {
   let dayId = req.params.id;
   try {

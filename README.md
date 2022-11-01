@@ -17,6 +17,16 @@
 
 ## Setup
 
+1. Install MySQL
+2. Clone repository
+3. Configure .env file for your database instance
+4. Run `npm install`
+5. Run `npm run migrate`
+6. Run `npm start` to start backend server
+7. Open new terminal and cd into client
+8. Run `npm install`
+9. Run `npm start` to start React app
+
 ## Scope of functionalities
 
 ### Overview view (/)
@@ -34,10 +44,35 @@
 
 ## User flow
 
-## Full stack architecture
+![userflow](/figures/userflow.png)
+
+## Component structure
+
+![component structure](/figures/components.png)
 
 ## Database design
 
+![database design](/figures/database.png)
+
 ## API routes
+
+1. Days
+
+- GET / (get all days)
+- GET /:id (get certain day and related data)
+- POST / (add new day)
+
+2. Pomodoro
+
+- GET /:day (get sessions for a given day)
+- POST / (add new session)
+
+3. Tasks
+
+- GET / (get all tasks)
+- GET /:day (get tasks for a given day)
+- POST / (insert new task)
+- DELETE /:id (delete task)
+- PATCH /:id (update task and set completed to true)
 
 ### This is a student project that was created at CodeOp, a full stack development bootcamp in Barcelona.

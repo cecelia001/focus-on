@@ -18,7 +18,7 @@ function Overview(props) {
       if (response.ok) {
         console.log(response);
         let overviewData = await response.json();
-        setOverviewData(overviewData);
+        setOverviewData(overviewData.reverse());
         // console.log(overviewData);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
