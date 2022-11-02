@@ -42,6 +42,16 @@
 3. Pomodoro tracker with buttons for start, timeout/continue and reset and a noise for when the tracker is started or the user is done with the pomodoro session.
 4. User can see how many sessions she already completed.
 
+## Future features
+
+1. Customize length of pomodoro sessions
+2. Set short and long breaks in between pomodoro sessions
+3. Embed music (for example spotify or youtube api)
+4. Long term planning (set tasks for future days)
+5. Add information about productivity in general
+6. Show statistics (like number of pomodoro sessions per week)
+7. Authentification
+
 ## User flow
 
 ![userflow](/figures/userflow.png)
