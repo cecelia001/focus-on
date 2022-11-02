@@ -88,7 +88,7 @@ function Tracker(props) {
     if (!intervalId) {
       const intervalId = setInterval(() => {
         setTime((time) => time - 1);
-      }, 1500);
+      }, 1000);
       setIntervalId(() => intervalId);
       play();
     }
