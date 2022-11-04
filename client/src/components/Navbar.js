@@ -80,8 +80,8 @@ export default function Simple() {
                 />
               </MenuButton >
               <MenuList bg={useColorModeValue('#4fa296', '#835dc7')} px={4}>
-                <MenuItem to="/tasks" > Overview </MenuItem>
-                <MenuItem to="/pomodoro" > Get Started </MenuItem>
+                <MenuItem to="/focus" > Overview </MenuItem>
+                <MenuItem to="/focus/:id" > Current Day </MenuItem>
                 <MenuItem to="/" > Profile </MenuItem>
                 <MenuItem>Logout</MenuItem>
                 <MenuDivider />

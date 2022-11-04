@@ -39,8 +39,8 @@ router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
 
 // INSERT a new task into the DB
 
-router.post("/:userId/", ensureSameUser, async (req, res) => {
-  let { userId } = req.params;
+router.post("/", ensureSameUser, async (req, res) => {
+  // let { userId } = req.params;
   let { title, description, day_id, completed } = req.body;
 
   let sql = `

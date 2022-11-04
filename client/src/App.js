@@ -52,12 +52,12 @@ function App() {
       <Navbar /> 
         <Routes>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/:userId" element={
+          <Route path="/focus" element={
             <PrivateRoute>
                 <Overview />
             </PrivateRoute>
           } />
-          <Route path="/focus/:userId/:id" element={
+          <Route path="/focus/:id" element={
             <PrivateRoute>
               <CurrentDay />
             </PrivateRoute>
@@ -68,7 +68,7 @@ function App() {
                   loginError={loginErrorMsg} 
               />
           } />
-          <Route path="*" element={<Error404View />} />
+          <Route path="/*" element={<Error404View />} />
         </Routes>
         <Container>
           <Text color="#FFECEF">Made with ❤️ by Lea Pipo</Text>

@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { Text, Button, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
 
-import TodayTask from "./TodayTask";
+import TodayTask from "./TodayTask";    //change these to find files
 import Tracker from "./Tracker";
 
 function CurrentDay(props) {
