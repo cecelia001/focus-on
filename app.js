@@ -10,6 +10,11 @@ var tasksRouter = require("./routes/tasks");
 var daysRouter = require("./routes/days");
 var pomodoroRouter = require("./routes/pomodoro");
 
+//CF added
+var authRouter = require('./routes/auth');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
 // var focusRouter = require("./routes/focus");
 
 var app = express();
@@ -29,6 +34,11 @@ app.use("/", indexRouter);
 app.use("/tasks", tasksRouter);
 app.use("/days", daysRouter);
 app.use("/pomodoro", pomodoroRouter);
+
+//CF Routes added
+app.use('/', authRouter); 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // app.use("/focus", focusRouter);
 

@@ -1,12 +1,16 @@
 var express = require("express");
 var router = express.Router();
+const { ensureSameUser } = require('../middleware/guards');
 const db = require("../model/helper");
 
 // GET all tasks
 
-router.get("/", async function (req, res, next) {
+router.get("/:userId/", ensureSameUser, async function (req, res, next) {
+  let { userId } = req.params;
+  let sql = 'SELECT * FROM tasks WHERE user_id = ' + userId;
+
   try {
-    let tasks = await db("SELECT * FROM tasks;");
+    let tasks = await db(sql);
     res.send(tasks.data);
   } catch (err) {
     res.status(500).send({ error: err.message });
@@ -15,10 +19,11 @@ router.get("/", async function (req, res, next) {
 
 // GET all task for a day
 
-router.get("/:day", async function (req, res, next) {
-  let day = req.params.day;
+router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
+  let { userId, day } = req.params;
+
   try {
-    let results = await db(`SELECT * FROM tasks WHERE day_id=${day}`);
+    let results = await db(`SELECT * FROM tasks WHERE user_id = ${userId} AND day_id=${day}`);
     let tasks = results.data;
     if (tasks.length === 0) {
       res
@@ -34,12 +39,13 @@ router.get("/:day", async function (req, res, next) {
 
 // INSERT a new task into the DB
 
-router.post("/", async (req, res) => {
+router.post("/:userId/", ensureSameUser, async (req, res) => {
+  let { userId } = req.params;
   let { title, description, day_id, completed } = req.body;
 
   let sql = `
-      INSERT INTO tasks (title, description, day_id, completed)
-      VALUES ('${title}', '${description}', ${day_id}, ${completed})
+      INSERT INTO tasks (title, description, day_id, completed, user_id)
+      VALUES ('${title}', '${description}', ${day_id}, ${completed}, ${userId})
   `;
   try {
     await db(sql);
@@ -53,8 +59,10 @@ router.post("/", async (req, res) => {
 
 // DELETE a task from DB
 
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:userId/:id", ensureSameUser, async function (req, res, next) {
   let taskId = req.params.id;
+  let userId = req.params.userId;
+
   try {
     let result = await db(`SELECT * FROM tasks WHERE id=${taskId}`);
     if (result.data.length === 0) {
@@ -72,7 +80,8 @@ router.delete("/:id", async function (req, res, next) {
 
 // UPDATE completed in task
 
-router.patch("/:id/completed", async function (req, res, next) {
+router.patch("/:userId/:id/completed", ensureSameUser, async function (req, res, next) {
+  let userId = req.params.userId;
   const taskId = req.params.id;
   const changes = req.body;
   try {
