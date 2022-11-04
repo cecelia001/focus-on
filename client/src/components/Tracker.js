@@ -31,10 +31,6 @@ function Tracker(props) {
     new Audio(clicksound).play();
   }
 
-  // function handleSubmit(event){
-  //   event.preventDefault();
-    
-  // }
 
   function printTime() {
     let minutes = Math.floor(time / 60);

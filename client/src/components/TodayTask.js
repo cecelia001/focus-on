@@ -40,12 +40,13 @@ function TodayTask(props) {
     setInputData(INIT_STATE);
   }
 
-  async function addTask() {
+  async function addTask(userid) {
     const newTaskObject = {
       title: inputData.todo,
       description: inputData.description,
       day_id: props.currentDayData.id,
       completed: 0,
+      userid: props.userid     //not sure what to put here
     };
 
     let options = {
@@ -54,7 +55,7 @@ function TodayTask(props) {
       body: JSON.stringify(newTaskObject),
     };
     try {
-      let response = await fetch("/tasks", options);
+      let response = await fetch(`/tasks/${userid}`, options);  //added userid here!
       if (response.ok) {
         props.updateDataCb();
       } else {
@@ -86,12 +87,12 @@ function TodayTask(props) {
     }
   }
 
-  async function deleteTask(id) {
+  async function deleteTask(userid, id) {       //tried passing userid here and on line 95 but not working
     let options = {
       method: "DELETE",
     };
     try {
-      let response = await fetch(`/tasks/${id}`, options);
+      let response = await fetch(`/tasks/${userid}/${id}`, options);
       if (response.ok) {
         props.updateDataCb();
       } else {
