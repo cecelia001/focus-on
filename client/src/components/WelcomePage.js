@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";                       //will this cause a problem??
+import { Link } from '@chakra-ui/react'
 
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 
@@ -27,8 +28,11 @@ function WelcomePage() {
         color="white"
         variant="solid"
       >
-        <Link to="/">Go back to overview</Link>
+        <Link as="a" href="/login">Login here</Link>
       </Button>
+
+      {/* copy and paste above to add place to register for account */}
+
     </Box>
   );
 }

@@ -28,7 +28,7 @@ function Error404View() {
         color="white"
         variant="solid"
       >
-        <Link to="/">Go back to overview</Link>
+        <Link to="/">Go back to home</Link>
       </Button>
     </Box>
   );

@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
 
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
 
 function LoginView(props) {
     const [username, setUsername] = useState('');
