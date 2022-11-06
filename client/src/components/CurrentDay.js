@@ -3,8 +3,8 @@ import { Link, useParams } from "react-router-dom";
 
 import { Text, Button, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
 
-import TodayTask from "../components/TodayTask";    
-import Tracker from "../components/Tracker";
+import TodayTask from "./TodayTask";    
+import Tracker from "./Tracker";
 
 function CurrentDay(props) {
   let { id } = useParams();

@@ -8,7 +8,7 @@ function DayCard(props) {
   let completedTasks = 0;
   let tasks = props.overviewData.tasks;
 
-  let linkToFocusView = `/current/${props.overviewData.id}`;    //changed from focus to current in url
+  let linkToFocusView = `/current/${props.overviewData.id}`;    //changed from focus to current in url  //DO I NEED TO ADD A PROPS.USERID to url???
 
   function getCompletedTasks() {
     for (let i = 0; i < tasks.length; i++) {

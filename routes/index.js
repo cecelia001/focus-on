@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 
 
 /**
- * GET /members-only
+ * GET /members-only  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  **/
 
 router.get('/members-only', ensureUserLoggedIn, function(req, res) {
@@ -23,8 +23,8 @@ router.get('/members-only', ensureUserLoggedIn, function(req, res) {
 
 /* GET home page. */
 //PREVIOUS CODE
-// router.get("/", function (req, res, next) {
-//   res.send({ title: "Express" });
-// });
+router.get("/", function (req, res, next) {
+  res.send({ title: "Express" });
+});
 
 module.exports = router;
