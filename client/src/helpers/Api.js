@@ -31,25 +31,25 @@ class Api {
      * Get all users 
      **/
 
-    // static async getUsers() {
-    //     return await this._doFetch('/users');
-    // }
+    static async getUsers() {
+        return await this._doFetch('/users');
+    }
 
     // /**
     //  * Get data for user with ID 'userId'
     //  **/
 
-    // static async getUser(userId) {
-    //     return await this._doFetch(`/users/${userId}`);
-    // }
+    static async getUser(userId) {
+        return await this._doFetch(`/users/${userId}`);
+    }
 
     // /**
     //  * General purpose GET (for URLs like /members-only)
     //  **/
 
-    // static async getContent(url) {
-    //     return await this._doFetch(url);
-    // }
+    static async getContent(url) {
+        return await this._doFetch(url);
+    }
 
     /**
      * Private method for internal use only

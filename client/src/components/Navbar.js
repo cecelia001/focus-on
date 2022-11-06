@@ -17,16 +17,16 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 
-import { HamburgerIcon, CloseIcon, TimeIcon } from '@chakra-ui/icons';
+import { TimeIcon } from '@chakra-ui/icons';
 
 
-export default function Simple() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+function NavBar(props) {
 
   return (
-    <>
+    <div>
       <Box bg={useColorModeValue('#4fa296', 'gray.900')} px={4}>
       <Flex
         w="100%"
@@ -42,10 +42,13 @@ export default function Simple() {
                 variant={'link'}
                 cursor={'pointer'}
                 minW={0}>
-                <TimeIcon w={6} h={6} /> Focus: ON!
+                <TimeIcon color="#F7FAFC" w={6} h={6} />
+                <Text color="#F7FAFC"> Focus: ON!</Text>
               </MenuButton >
+            
               <MenuList bg={useColorModeValue('#4fa296', '#835dc7')} px={4}>
                 <MenuItem as="a" href="/" > Home </MenuItem>
+                <MenuItem as="a" href="/login" > Login </MenuItem>
               </MenuList>
             </Menu>
         
@@ -64,28 +67,39 @@ export default function Simple() {
                   }
                 />
               </MenuButton >
-              <MenuList bg={useColorModeValue('#4fa296', '#835dc7')} px={4}>
-                <MenuItem as="a" href="/login" > Login </MenuItem>
-                <MenuItem as="a" href="/focus" > Overview </MenuItem>
-                {/* <MenuItem as="a" href="/focus/:id" > Current Day </MenuItem> //don't want this because won't show today task*/}
-                <MenuItem to="/" > Profile </MenuItem>
-                <MenuItem>Logout</MenuItem>
-                <MenuDivider />
+
+
+
+{/* Right-aligned stuff, based on whether user is logged in */}
+{
+    props.user
+        ?   
+            (
+
+              <MenuList bg="#4fa296" px={4}>
+                <MenuItem as="a" href={`/profile/${props.user.id}`}>Profile ({props.user.username})</MenuItem>
+                <MenuItem as="a" href={`/focus/${props.user.id}`}> Overview </MenuItem>
+                <MenuItem as="a" to="/" onClick={props.logoutCb}>Logout</MenuItem>
               </MenuList>
+ 
+            )
+        :
+            (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/login">Login</NavLink>
+                    </li>
+                </ul>
+            )
+}
+
             </Menu>
           </Flex>
         </Flex>
 
       </Box>
-
-    </>
+      </div>
   );
 }
-  
 
-{/* <nav className="Navbar">
-<ul>
-
-    <li><MyNavLink to="/login">Login</MyNavLink></li>
-</ul>
-</nav> */}
+export default NavBar;

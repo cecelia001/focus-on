@@ -1,4 +1,14 @@
 import React, { useState } from 'react';
+import { 
+    Button,
+    Heading,
+    Container,
+    Input,
+    Stack,
+    InputGroup,
+    InputLeftElement,
+ } from '@chakra-ui/react'
+
 
 
 function LoginView(props) {
@@ -24,10 +34,20 @@ function LoginView(props) {
         props.loginCb(username, password);
     }
 
+
+
     return (
+        <Container maxW='md' color='white'>
+        
+        <Stack spacing="8">
+
+          <Heading fontsize="lg" mt="50px" mb="30px">
+            Log in to your account
+          </Heading>
+
+      </Stack>
+
         <div className="LoginView row">
-            <div className="col-4 offset-4">
-                <h2>Login</h2>
                 
                 {
                     props.loginError && (
@@ -36,36 +56,44 @@ function LoginView(props) {
                 }
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Username
-                            <input
-                                type="text"
+
+                    <Stack spacing={4}>
+                        <InputGroup>
+                            <InputLeftElement
+                            pointerEvents='none'
+                            />
+                            <Input 
+                                type='text' 
+                                placeholder='Username'
                                 name="usernameInput"
                                 required
                                 className="form-control"
                                 value={username}
                                 onChange={handleChange}
-                            />
-                        </label>
-                    </div>
+                                 />
+                        </InputGroup>
 
-                    <div className="form-group">
-                        <label>Password
-                            <input
-                                type="password"
-                                name="passwordInput"
-                                required
-                                className="form-control"
-                                value={password}
-                                onChange={handleChange}
+                        <InputGroup>
+                            <InputLeftElement
+                            pointerEvents='none'
+                            color='gray.300'
+                            fontSize='1.2em'
                             />
-                        </label>
-                    </div>
+                            <Input 
+                            type="password"
+                            name="passwordInput"
+                            required
+                            className="form-control"
+                            value={password}
+                            onChange={handleChange}
+                            placeholder='Password' />
+                        </InputGroup>
+                    </Stack>
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <Button colorScheme='blue' mt="20px" type="submit">Submit</Button>
                 </form>
-            </div>
         </div>
+        </Container>
     );
 
 }

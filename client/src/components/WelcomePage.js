@@ -1,39 +1,37 @@
 import React from "react";
 // import { Link } from "react-router-dom";                       //will this cause a problem??
-import { Link } from '@chakra-ui/react'
+import { Link, Box, Button, Container, GridItem, Heading, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { TimeIcon } from '@chakra-ui/icons';
+
 
 function WelcomePage() {
   return (
-    <Box textAlign="center" py={10} px={6}>
-      <Heading
-        display="inline-block"
-        as="h2"
-        size="2xl"
-        bgGradient="linear(to-r, rose.400, teal.600)"
-        backgroundClip="text"
-      >
-      </Heading>
-      <Text fontSize="18px" mt={3} mb={2}>
-        Welcome to Focus:ON! 
-      </Text>
-      <Text color={"gray.500"} mb={6}>
-        Description of page will go here. Create account or login to get started. 
-      </Text>
+<Box as="section" bg="bg-surface">
+    <Container py={{ base: '16', md: '24' }}>
+      <Stack spacing={{ base: '8', md: '10' }}>
+        <Stack spacing={{ base: '4', md: '5' }} align="center">
+          <Heading as='h1' size='3xl' noOfLines={1}>Focus:ON</Heading>
+          <Heading as='h2' size='lg' noOfLines={1}>Ready to be productive?</Heading>
+          <TimeIcon color="#F7FAFC" w={160} h={160}/>
+          <Heading as='h2' size='md' noOfLines={1}>3...2...1...GO!</Heading>
+        </Stack>
 
-      <Button
+        
+
+    {/* <Button
         colorScheme="gray"
         bgGradient="linear(to-r, gray.400, gray.500, gray.600)"
         color="white"
         variant="solid"
       >
         <Link as="a" href="/login">Login here</Link>
-      </Button>
+      </Button> */}
 
-      {/* copy and paste above to add place to register for account */}
+      </Stack>
+    </Container>
+  </Box>
 
-    </Box>
   );
 }
 

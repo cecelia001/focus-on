@@ -12,14 +12,15 @@ import Api from './helpers/Api';
 
 import Navbar from './components/Navbar';
 
-import CurrentDay from "./components/CurrentDay";
+
 import Overview from "./components/Overview";
-import Error404View from "./components/Error404View";
 import WelcomePage from "./components/WelcomePage";
 import PrivateRoute from './components/PrivateRoute';
+import CurrentDay from "./components/CurrentDay";
+
 import LoginView from './views/LoginView';
-// import ErrorView from './views/ErrorView';
 import ProfileView from './views/ProfileView';
+import Error404View from "./views/Error404View";
 
 function App() {
 //ADDED BY ME
@@ -49,15 +50,17 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <div className="App">
-      <Navbar /> 
+      <Navbar user={user} logoutCb={doLogout} /> 
+
+      <div className="container">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/focus" element={
+          <Route path="/focus/:userId" element={
             <PrivateRoute>
                 <Overview />
             </PrivateRoute>
           } />
-          <Route path="/focus/:id" element={
+          <Route path="/current/:id" element={
             <PrivateRoute>
               <CurrentDay />
             </PrivateRoute>
@@ -68,8 +71,14 @@ function App() {
                   loginError={loginErrorMsg} 
               />
           } />
+          <Route path="/profile/:userId" element={
+            <PrivateRoute>
+              <ProfileView />
+            </PrivateRoute>
+          } />
           <Route path="/*" element={<Error404View />} />
         </Routes>
+        </div>
         <Container>
           <Text color="#FFECEF">Made with ❤️ by Lea Pipo</Text>
         </Container>

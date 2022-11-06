@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Api from '../helpers/Api';
+import { Link, Box, Button, Container, SimpleGrid, GridItem, Heading, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
 
 
 function ProfileView(props) {
@@ -33,12 +34,37 @@ function ProfileView(props) {
     }
 
     return (
-        <div className="ProfileView">
-            <h1>Profile View</h1>
-            ID: {user.id}<br />
-            Username: {user.username}<br />
-            Email: {user.email}
-        </div>
+
+            <Box as="section" bg="bg-surface">
+                <Container py={{ base: '16', md: '24' }}>
+                  <Stack spacing={{ base: '8', md: '10' }}>
+                    <Stack spacing={{ base: '4', md: '5' }} align="center">
+                      <Heading as='h1' size='3xl' noOfLines={1}>Profile</Heading>
+
+                      <SimpleGrid columns={1} spacingX='40px' spacingY='20px'>
+                            <Box bg='#FFECEF' height='40px' width= '300px' color="#372948" borderRadius="lg" borderWidth="medium">
+                                <Text as='h4' size='lg' noOfLines={1}>
+                                ID: {user.id}
+                                </Text>
+                            </Box>
+
+                            <Box bg='#FFECEF' height='40px' width= '300px' color="#372948" borderRadius="lg" borderWidth="medium">
+                                <Text as='h4' size='lg' noOfLines={1}>
+                                Username: {user.username}
+                                </Text>
+                            </Box>
+
+                            <Box bg='#FFECEF' height='40px' width= '300px' color="#372948" borderRadius="lg" borderWidth="medium">
+                                <Text as='h4' size='lg' noOfLines={1}>
+                                Email: {user.email}
+                                </Text>
+                            </Box>
+                     </SimpleGrid>
+                    </Stack>
+                  </Stack>
+                </Container>
+              </Box>
+   
     );
 }
 
