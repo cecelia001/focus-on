@@ -80,10 +80,25 @@ router.delete("/:userId/:id", ensureSameUserP, async function (req, res, next) {
 
 // UPDATE completed in task
 
+// router.patch("/:userId/:id/completed", ensureSameUserP, async function (req, res, next) {
+//   let userId = req.params.userId;
+//   let taskId = req.params.id;
+//   let { changes } = req.body;
+//   try {
+//     await db(
+//       `UPDATE tasks SET completed=${changes.completed} WHERE user_id=${userId} AND id=${taskId}`
+//     );
+//     let updatedTask = await db(`SELECT * FROM tasks WHERE user_id=${userId} AND id=${taskId}`);
+//     res.status(201).send(updatedTask.data);
+//   } catch (err) {
+//     res.status(500).send({ error: err.message });
+//   }
+// });
+
 router.patch("/:userId/:id/completed", ensureSameUserP, async function (req, res, next) {
   let userId = req.params.userId;
-  const taskId = req.params.id;
-  const { changes }  = req.body;
+  let taskId = req.params.id;
+  let changes = req.body;
   try {
     await db(
       `UPDATE tasks SET completed=${changes.completed} WHERE user_id=${userId} AND id=${taskId}`

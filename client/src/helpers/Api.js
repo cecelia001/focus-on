@@ -70,7 +70,7 @@ class Api {
     //  * PATCH (edit Task, mark as complete)
     //  **/
     static async updateTask(userId, id, completedTask) {
-        return await this._doFetch(`/tasks/${userId}/${id}/completed`, "PATCH", (completedTask));
+        return await this._doFetch(`/tasks/${userId}/${id}/completed`, "PATCH", completedTask);
     }
 
 

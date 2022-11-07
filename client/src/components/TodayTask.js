@@ -71,8 +71,7 @@ function TodayTask(props) {
     let uid = Local.getUserId()
 
     let completedTask = {
-      completed: 1,
-      user_id: uid
+      completed: 1
     };
 
     let response = await Api.updateTask(uid, id, completedTask);
