@@ -5,9 +5,9 @@ const db = require("../model/helper");
 
 // GET pomodoro sessions for a specific day
 
-router.get("/:userId/:day", ensureSameUser, async (req, res) => {
+router.get("/:day", ensureSameUser, async (req, res) => {
   let dayId = req.params.day;
-  let userId = req.params.userId;
+  // let userId = req.params.userId;
 
   try {
     let results = await db(`SELECT * FROM pomodoro WHERE user_id = ${userId} AND day_id = ${dayId}`);
@@ -26,8 +26,8 @@ router.get("/:userId/:day", ensureSameUser, async (req, res) => {
 
 // POST new pomodoro session
 
-router.post("/:userId/", ensureSameUser, async (req, res) => {
-  let userId = req.params.userId;
+router.post("/", ensureSameUser, async (req, res) => {
+  // let userId = req.params.userId;
   let { day_id } = req.body;
 
   let sql = `

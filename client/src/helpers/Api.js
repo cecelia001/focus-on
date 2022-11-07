@@ -28,7 +28,7 @@ class Api {
     }
 
     /**
-     * Get all users 
+     * Get all users
      **/
 
     static async getUsers() {
@@ -43,8 +43,18 @@ class Api {
         return await this._doFetch(`/users/${userId}`);
     }
 
+
+   // /**
+    //  * Get data for '
+    //  **/
+
+    static async addTask(userId, newTaskObj) {
+        return await this._doFetch(`/tasks/${userId}`, 'POST', newTaskObj);
+    }
+
+
     // /**
-    //  * General purpose GET (for URLs like /members-only)
+    //  * General purpose GET (for URLs like /members-only) (not needed)
     //  **/
 
     static async getContent(url) {

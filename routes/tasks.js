@@ -7,7 +7,7 @@ const db = require("../model/helper");
 
 router.get("/:userId/", ensureSameUser, async function (req, res, next) {
   let { userId } = req.params;
-  let sql = 'SELECT * FROM tasks WHERE user_id = ' + userId;
+  let sql = `SELECT * FROM tasks WHERE user_id= ${userId}`;  //took out part with userId
 
   try {
     let tasks = await db(sql);
@@ -19,7 +19,7 @@ router.get("/:userId/", ensureSameUser, async function (req, res, next) {
 
 // GET all task for a day
 
-router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
+router.get("/:day", ensureSameUser, async function (req, res, next) {
   let { userId, day } = req.params;
 
   try {
@@ -39,17 +39,17 @@ router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
 
 // INSERT a new task into the DB
 
-router.post("/:userId/", ensureSameUser, async (req, res) => {
-  let { userId } = req.params;
+router.post("/:user_id/", ensureSameUser, async (req, res) => {
+  let { user_id } = req.params;
   let { title, description, day_id, completed } = req.body;
 
   let sql = `
       INSERT INTO tasks (title, description, day_id, completed, user_id)
-      VALUES ('${title}', '${description}', ${day_id}, ${completed}, ${userId})
+      VALUES ('${title}', '${description}', ${day_id}, ${completed}, ${+user_id})
   `;
   try {
     await db(sql);
-    let result = await db(`SELECT * FROM tasks WHERE user_id = ${userId}`);  //edited to add where clause
+    let result = await db(`SELECT * FROM tasks`); 
     let tasks = result.data;
     res.status(201).send(tasks);
   } catch (err) {
@@ -59,9 +59,9 @@ router.post("/:userId/", ensureSameUser, async (req, res) => {
 
 // DELETE a task from DB
 
-router.delete("/:userId/:id", ensureSameUser, async function (req, res, next) {
+router.delete("/:id", ensureSameUser, async function (req, res, next) {
   let taskId = req.params.id;
-  let userId = req.params.userId;
+  // let userId = req.params.userId;
 
   try {
     let result = await db(`SELECT * FROM tasks WHERE id=${taskId}`);
@@ -80,7 +80,7 @@ router.delete("/:userId/:id", ensureSameUser, async function (req, res, next) {
 
 // UPDATE completed in task
 
-router.patch("/:userId/:id/completed", ensureSameUser, async function (req, res, next) {
+router.patch("/:id/completed", ensureSameUser, async function (req, res, next) {
   let userId = req.params.userId;
   const taskId = req.params.id;
   const changes = req.body;

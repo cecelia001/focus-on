@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import Local from "../helpers/Local.js";
+import Api from "../helpers/Api.js";
+
 import {
   Container,
   Text,
@@ -40,22 +43,25 @@ function TodayTask(props) {
     setInputData(INIT_STATE);
   }
 
-  async function addTask(userid) {
-    const newTaskObject = {
+  async function addTask() {
+    let id = Local.getUserId(); 
+
+    const newTaskObj = {
       title: inputData.todo,
       description: inputData.description,
       day_id: props.currentDayData.id,
       completed: 0,
-      userid: props.userid     //not sure what to put here
+      user_id: id
     };
 
-    let options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTaskObject),
-    };
+    // let options = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(newTaskObject),
+    // };
     try {
-      let response = await fetch(`/tasks/${userid}`, options);  //added userid here!
+      // let response = await fetch(`/tasks/${id}`, options);  //id from local
+      let response = Api.addTask(id, newTaskObj)
       if (response.ok) {
         props.updateDataCb();
       } else {
@@ -87,12 +93,12 @@ function TodayTask(props) {
     }
   }
 
-  async function deleteTask(userid, id) {       //tried passing userid here and on line 95 but not working
+  async function deleteTask(id) {       //tried passing userid here and on line 95 but not working
     let options = {
       method: "DELETE",
     };
     try {
-      let response = await fetch(`/tasks/${userid}/${id}`, options);
+      let response = await fetch(`/tasks/${id}`, options);
       if (response.ok) {
         props.updateDataCb();
       } else {
