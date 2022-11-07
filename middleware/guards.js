@@ -39,7 +39,7 @@ function ensureSameUser(req, res, next) {
         // Throws error on invalid/missing token
         let payload = jwt.verify(token, SECRET_KEY);
         // If we get here, a valid token was passed
-        if (payload.userId === Number(req.body.user_id)) {
+        if (payload.userId === Number(req.body.user_id)) {  //keep params.userId for delete to work
             next();
         } else {
             res.status(403).send({ error: 'Forbidden' });
@@ -49,6 +49,24 @@ function ensureSameUser(req, res, next) {
     }
 }
 
+
+//attempt to fix req.params/body issue
+function ensureSameUserP(req, res, next) {
+    let token = _getToken(req);
+
+    try {
+        // Throws error on invalid/missing token
+        let payload = jwt.verify(token, SECRET_KEY);
+        // If we get here, a valid token was passed
+        if (payload.userId === Number(req.params.userId)) {  //keep params.userId for delete to work
+            next();
+        } else {
+            res.status(403).send({ error: 'Forbidden' });
+        }
+    } catch (err) {
+        res.status(401).send({ error: 'Unauthorized' });
+    }
+}
 
 /**
  * Return the JWT token if found, else return ''
@@ -71,5 +89,6 @@ function _getToken(req) {
 
 module.exports = {
     ensureUserLoggedIn,
-    ensureSameUser
+    ensureSameUser,
+    ensureSameUserP
 };

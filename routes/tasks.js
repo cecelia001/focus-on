@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { ensureSameUser } = require('../middleware/guards');
+const { ensureSameUser, ensureSameUserP } = require('../middleware/guards');
 const db = require("../model/helper");
 
 // GET all tasks
@@ -40,7 +40,7 @@ router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
 // INSERT a new task into the DB
 
 router.post("/", ensureSameUser, async (req, res) => {
-  // let { userId } = req.params;
+  // let userId = req.params.userId;
   let { title, description, day_id, completed, user_id } = req.body;
 
   let sql = `
@@ -59,16 +59,16 @@ router.post("/", ensureSameUser, async (req, res) => {
 
 // DELETE a task from DB
 
-router.delete("/:userId/:id", ensureSameUser, async function (req, res, next) {
+router.delete("/:userId/:id", ensureSameUserP, async function (req, res, next) {
   let taskId = req.params.id;
   let userId = req.params.userId;
 
   try {
-    let result = await db(`SELECT * FROM tasks WHERE id=${taskId}`);
+    let result = await db(`SELECT * FROM tasks WHERE user_id=${userId} AND id=${taskId}`);
     if (result.data.length === 0) {
       res.status(404).send({ error: "Task not found" });
     } else {
-      await db(`DELETE FROM tasks WHERE id=${taskId}`);
+      await db(`DELETE FROM tasks WHERE user_id=${userId} AND id=${taskId}`);
       let result = await db(`SELECT * FROM tasks`);
       let tasks = result.data;
       res.status(201).send(tasks);
@@ -80,15 +80,15 @@ router.delete("/:userId/:id", ensureSameUser, async function (req, res, next) {
 
 // UPDATE completed in task
 
-router.patch("/:userId/:id/completed", ensureSameUser, async function (req, res, next) {
+router.patch("/:userId/:id/completed", ensureSameUserP, async function (req, res, next) {
   let userId = req.params.userId;
   const taskId = req.params.id;
-  const changes = req.body;
+  const { changes }  = req.body;
   try {
     await db(
-      `UPDATE tasks SET completed=${changes.completed} WHERE id=${taskId}`
+      `UPDATE tasks SET completed=${changes.completed} WHERE user_id=${userId} AND id=${taskId}`
     );
-    let updatedTask = await db(`SELECT * FROM tasks WHERE id=${taskId}`);
+    let updatedTask = await db(`SELECT * FROM tasks WHERE user_id=${userId} AND id=${taskId}`);
     res.status(201).send(updatedTask.data);
   } catch (err) {
     res.status(500).send({ error: err.message });

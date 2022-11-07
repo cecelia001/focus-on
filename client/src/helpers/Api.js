@@ -47,27 +47,39 @@ class Api {
     //  * General purpose GET (for URLs like /members-only)
     //  **/
 
-    static async getContent(url) {
-        return await this._doFetch(url);
-    }
+    // static async getContent(url) {
+    //     return await this._doFetch(url);
+    // }
 
-        // /**
-    //  * GET (for URLs like /members-only)
-    //  **/
-
-    static async addTask(newTaskObj) {
-        return await this._doFetch(`/tasks`, "POST", newTaskObj);
-    }
-
-
-        // /**
-    //  * Get data for user with ID 'userId'
+    // /**
+    //  * Get tasks for user with ID 'userId'
     //  **/
 
     static async getTasks(userId) {
         return await this._doFetch(`/tasks/${userId}`);
     }
 
+    // /**
+    //  * POST (add Task)
+    //  **/
+
+    static async addTask(newTaskObj) {
+        return await this._doFetch(`/tasks`, "POST", newTaskObj);
+    }
+
+    //  * PATCH (edit Task, mark as complete)
+    //  **/
+    static async updateTask(userId, id, completedTask) {
+        return await this._doFetch(`/tasks/${userId}/${id}/completed`, "PATCH", (completedTask));
+    }
+
+
+    //  * DELETE task
+    //  **/
+
+    static async deleteTask(userId, id) {
+        return await this._doFetch(`/tasks/${userId}/${id}`, "DELETE");
+    }
 
     /**
      * Private method for internal use only

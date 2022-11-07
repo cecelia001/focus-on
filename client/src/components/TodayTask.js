@@ -29,6 +29,7 @@ const INIT_STATE = {
 function TodayTask(props) {
   let [inputData, setInputData] = useState(INIT_STATE);
 
+
   function handleChange(event) {
     let { name, value } = event.target;
     setInputData((data) => ({
@@ -45,8 +46,7 @@ function TodayTask(props) {
 
   async function addTask(userid) {
     let id = Local.getUserId()
-    
-
+  
     const newTaskObj = {
       title: inputData.todo,
       description: inputData.description,
@@ -55,62 +55,45 @@ function TodayTask(props) {
       user_id: id     
     };
 
-    console.log(newTaskObj.user_id);
+    // console.log(newTaskObj.user_id);
+  
 
     let response = await Api.addTask(newTaskObj);
-
-    // let options = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(newTaskObject),
-    // };
-    // try {
-    //   let response = await fetch(`/tasks/${userid}`, options);  //added userid here!
       if (response.ok) {
         props.updateDataCb();
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-    // } catch (err) {
-    //   console.log(`Server error: ${err.message}`);
-    // }
+ 
   }
 
-  async function updateTask(id) {
+  async function updateTask(id) {  
+    let uid = Local.getUserId()
+
     let completedTask = {
       completed: 1,
+      user_id: uid
     };
-    let options = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: JSON.stringify(completedTask),
-    };
-    try {
-      let response = await fetch(`/tasks/${id}/completed`, options);
+
+    let response = await Api.updateTask(uid, id, completedTask);
       if (response.ok) {
         props.updateDataCb();
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
+      console.log(id);
   }
 
-  async function deleteTask(userid, id) {       //tried passing userid here and on line 95 but not working
-    let options = {
-      method: "DELETE",
-    };
-    try {
-      let response = await fetch(`/tasks/${userid}/${id}`, options);
+  async function deleteTask(id) {  
+    let uid = Local.getUserId()  
+
+
+    let response = await Api.deleteTask(uid, id)
       if (response.ok) {
         props.updateDataCb();
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
   }
 
   return (
@@ -125,7 +108,7 @@ function TodayTask(props) {
         {props.currentDayData.tasks.map((element) => (
           <AccordionItem key={element.id}>
             <h2>
-              <AccordionButton>
+              <AccordionButton >
                 <Box
                   flex="1"
                   textAlign="left"

@@ -6,6 +6,8 @@ import { Text, Button, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
 import TodayTask from "./TodayTask";    
 import Tracker from "./Tracker";
 
+import Local from "../helpers/Local";
+
 function CurrentDay(props) {
   let { id } = useParams();
   let [currentDayData, setCurrentDayData] = useState({});
@@ -15,8 +17,9 @@ function CurrentDay(props) {
   }, []);
 
   async function getCurrentDayData() {
+    let userId = Local.getUserId()
     try {
-      let response = await fetch(`/days/currentday/${id}`);
+      let response = await fetch(`/days/${userId}/currentday/${id}`);
       if (response.ok) {
         let currentDayData = await response.json();
 
