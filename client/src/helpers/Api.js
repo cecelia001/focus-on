@@ -51,6 +51,24 @@ class Api {
         return await this._doFetch(url);
     }
 
+        // /**
+    //  * GET (for URLs like /members-only)
+    //  **/
+
+    static async addTask(newTaskObj) {
+        return await this._doFetch(`/tasks`, "POST", newTaskObj);
+    }
+
+
+        // /**
+    //  * Get data for user with ID 'userId'
+    //  **/
+
+    static async getTasks(userId) {
+        return await this._doFetch(`/tasks/${userId}`);
+    }
+
+
     /**
      * Private method for internal use only
      **/

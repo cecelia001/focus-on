@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import Local from "../helpers/Local";
+import Api from "../helpers/Api";
+
 import {
   Container,
   Text,
@@ -41,29 +44,36 @@ function TodayTask(props) {
   }
 
   async function addTask(userid) {
-    const newTaskObject = {
+    let id = Local.getUserId()
+    
+
+    const newTaskObj = {
       title: inputData.todo,
       description: inputData.description,
       day_id: props.currentDayData.id,
       completed: 0,
-      userid: props.userid     //not sure what to put here
+      user_id: id     
     };
 
-    let options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTaskObject),
-    };
-    try {
-      let response = await fetch(`/tasks/${userid}`, options);  //added userid here!
+    console.log(newTaskObj.user_id);
+
+    let response = await Api.addTask(newTaskObj);
+
+    // let options = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(newTaskObject),
+    // };
+    // try {
+    //   let response = await fetch(`/tasks/${userid}`, options);  //added userid here!
       if (response.ok) {
         props.updateDataCb();
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
+    // } catch (err) {
+    //   console.log(`Server error: ${err.message}`);
+    // }
   }
 
   async function updateTask(id) {

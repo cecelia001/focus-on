@@ -39,17 +39,17 @@ router.get("/:userId/:day/", ensureSameUser, async function (req, res, next) {
 
 // INSERT a new task into the DB
 
-router.post("/:userId/", ensureSameUser, async (req, res) => {
-  let { userId } = req.params;
-  let { title, description, day_id, completed } = req.body;
+router.post("/", ensureSameUser, async (req, res) => {
+  // let { userId } = req.params;
+  let { title, description, day_id, completed, user_id } = req.body;
 
   let sql = `
       INSERT INTO tasks (title, description, day_id, completed, user_id)
-      VALUES ('${title}', '${description}', ${day_id}, ${completed}, ${userId})
+      VALUES ('${title}', '${description}', ${day_id}, ${completed}, ${user_id})
   `;
   try {
     await db(sql);
-    let result = await db(`SELECT * FROM tasks WHERE user_id = ${userId}`);  //edited to add where clause
+    let result = await db(`SELECT * FROM tasks WHERE user_id = ${user_id}`);  //edited to add where clause
     let tasks = result.data;
     res.status(201).send(tasks);
   } catch (err) {

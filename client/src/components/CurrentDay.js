@@ -16,7 +16,7 @@ function CurrentDay(props) {
 
   async function getCurrentDayData() {
     try {
-      let response = await fetch(`/days/${id}`);
+      let response = await fetch(`/days/currentday/${id}`);
       if (response.ok) {
         let currentDayData = await response.json();
 

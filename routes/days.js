@@ -4,7 +4,9 @@ const db = require("../model/helper");
 
 // GET all days
 
-router.get("/", async function (req, res, next) {
+router.get("/:userId/", async function (req, res, next) {
+  let { userId } =req.params;
+
   try {
     let daysData = [];
 
@@ -12,11 +14,11 @@ router.get("/", async function (req, res, next) {
     let days = results.data;
 
     for (let date of days) {
-      let taskResults = await db(`SELECT * FROM tasks WHERE day_id=${date.id}`);
+      let taskResults = await db(`SELECT * FROM tasks WHERE day_id=${date.id} AND user_id=${userId}`);
       let tasks = taskResults.data;
 
       let pomodoroResults = await db(
-        `SELECT * from pomodoro WHERE day_id=${date.id}`
+        `SELECT * from pomodoro WHERE day_id=${date.id} AND user_id=${userId}`
       );
       let pomodoro = pomodoroResults.data;
 
@@ -37,7 +39,7 @@ router.get("/", async function (req, res, next) {
 
 // GET day
 
-router.get("/:id", async function (req, res, next) {
+router.get("/currentday/:id", async function (req, res, next) {
   let dayId = req.params.id;
   try {
     let results = await db(`SELECT * FROM days WHERE id=${dayId}`);
