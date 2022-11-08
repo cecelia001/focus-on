@@ -3,9 +3,9 @@
 ## Added Feature Extension
 
 1. Login page with authentification/authorization.
-2. Added Profile page.
-3. Added Welcome page.
-4. Added NavBar.
+2. Added Welcome page, Login page, Register page, and Profile Page.
+3. Added NavBar.
+4. Register new user page.
 
 
 ## Additional Setup
