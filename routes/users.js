@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { ensureSameUser } = require('../middleware/guards');
+const { ensureSameUser, ensureSameUserP } = require('../middleware/guards');
 const db = require("../model/helper");
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -28,7 +28,7 @@ router.get('/', async function(req, res, next) {
  * A user can only see his/her own profile info.
  **/
 
-router.get('/:userId', ensureSameUser, async function(req, res, next) {
+router.get('/:userId', ensureSameUserP, async function(req, res, next) {
     let { userId } = req.params;
     let sql = 'SELECT * FROM users WHERE id = ' + userId;
     

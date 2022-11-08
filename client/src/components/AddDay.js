@@ -19,7 +19,7 @@ function AddDay(props) {
       if (response.ok) {
         let newDay = await response.json();
         let dayId = newDay[0].id;
-        navigate(`/focus/${dayId}`);
+        navigate(`/current/${dayId}`);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

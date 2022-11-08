@@ -81,6 +81,8 @@ class Api {
         return await this._doFetch(`/tasks/${userId}/${id}`, "DELETE");
     }
 
+
+
     /**
      * Private method for internal use only
      **/
