@@ -2,7 +2,7 @@
  * All localStorage implementation is here
  **/
 
-////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
  class Local {
 

@@ -3,7 +3,6 @@ var router = express.Router();
 const { ensureSameUser, ensureSameUserP } = require('../middleware/guards');
 const db = require("../model/helper");
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /**
  * Get all users

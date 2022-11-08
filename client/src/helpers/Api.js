@@ -1,6 +1,5 @@
 import Local from './Local';
 
-//!!!!!!!!!!!!!!!!!!!!!! UNCOMMENTED GETUSER DATA BELOW< NEED TO REPLACE, NOT SURE WITH WHAT YET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /**
  * This is a helper class that places all "knowledge" about doing a fetch() in one place. 

@@ -9,8 +9,6 @@ import Api from "../helpers/Api";
 function AddDay(props) {
   const navigate = useNavigate();
 
-console.log("hello", props.overviewData);
-
   async function insertDay() {
     let id = Local.getUserId()
 

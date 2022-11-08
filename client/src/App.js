@@ -23,7 +23,7 @@ import ProfileView from './views/ProfileView';
 import Error404View from "./views/Error404View";
 
 function App() {
-//ADDED BY ME
+  
   const [user, setUser] = useState(Local.getUser());
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const navigate = useNavigate();

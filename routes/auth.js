@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
 const db = require("../model/helper");
 
-//COPIED FROM DEMO.... GO BACK TO UNDERSTAND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /**
  * Register a user
  **/

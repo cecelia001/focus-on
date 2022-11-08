@@ -24,7 +24,7 @@ import { InfoOutlineIcon } from "@chakra-ui/icons";
 import clicksound from "../assets/clicksound.mp3";
 
 function Tracker(props) {
-  let [time, setTime] = useState(1500);  //would set this to nothing
+  let [time, setTime] = useState(1500);  
   let [intervalId, setIntervalId] = useState(null);
 
   function play() {
@@ -170,7 +170,7 @@ function Tracker(props) {
       </Container>
 
       <Container>
-        <CircularProgress                                                                         //input would go here to set timer to whatever #
+        <CircularProgress                                                                      
           mt={0}
           value={(time / 1500) * 100}
           color="#F2D1D1"

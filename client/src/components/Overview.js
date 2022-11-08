@@ -9,7 +9,7 @@ import AddDay from "./AddDay";
 
 function Overview(props) {
   let [overviewData, setOverviewData] = useState([]);
-  let [dayId, setDayId] = useState(0);
+  
 
   useEffect(() => {
     getOverviewData();
@@ -55,7 +55,7 @@ function Overview(props) {
           <Text fontSize="6xl">Focus:ON</Text>
         </GridItem>
       </Grid>
-      {overviewData && !checkDate() && <AddDay overviewData={overviewData} setDayId={setDayId} dayId={dayId} />}
+      {overviewData && !checkDate() && <AddDay overviewData={overviewData} />}
       {/* overviewData is an empty array before getOverviewData() executes.
       If overviewData gets passed to DayCard before the data from the asynchronous function has arrived, it will be undefined.
       Therefore, either: overviewData && DayCard (DayCard will only render when condition is truthy) or as below: */}

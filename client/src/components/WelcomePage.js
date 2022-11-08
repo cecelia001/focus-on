@@ -1,6 +1,6 @@
 import React from "react";
-// import { Link } from "react-router-dom";                       //will this cause a problem??
-import { Link, Box, Button, Container, GridItem, Heading, Stack, Text, useBreakpointValue } from '@chakra-ui/react'
+// import { Link } from "react-router-dom";                      
+import { Box, Container, Heading, Stack } from '@chakra-ui/react'
 
 import { TimeIcon } from '@chakra-ui/icons';
 
@@ -16,18 +16,6 @@ function WelcomePage() {
           <TimeIcon color="#F7FAFC" w={160} h={160}/>
           <Heading as='h2' size='md' noOfLines={1}>3...2...1...GO!</Heading>
         </Stack>
-
-        
-
-    {/* <Button
-        colorScheme="gray"
-        bgGradient="linear(to-r, gray.400, gray.500, gray.600)"
-        color="white"
-        variant="solid"
-      >
-        <Link as="a" href="/login">Login here</Link>
-      </Button> */}
-
       </Stack>
     </Container>
   </Box>

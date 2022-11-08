@@ -13,12 +13,12 @@ router.get('/', function(req, res) {
 
 
 /**
- * GET /members-only  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * GET /members-only 
  **/
 
-router.get('/members-only', ensureUserLoggedIn, function(req, res) {
-    res.send({ message: 'Here is your Members Only content from the server...' });
-});
+// router.get('/members-only', ensureUserLoggedIn, function(req, res) {
+//     res.send({ message: 'Here is your Members Only content from the server...' });
+// });
 
 
 /* GET home page. */

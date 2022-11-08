@@ -80,7 +80,7 @@ function TodayTask(props) {
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-      console.log(id);
+      // console.log(id);
   }
 
   async function deleteTask(id) {  
