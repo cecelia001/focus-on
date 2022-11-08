@@ -1,11 +1,26 @@
 # Focus:ON
 
+## Added Feature Extension
+
+1. Login page with authentification/authorization.
+2. Added Profile page.
+3. Added Welcome page.
+4. Added NavBar.
+
+
+## Additional Setup
+1. Run `npm jsonwebtoken` to server side.
+2. Run `npm bcrypt` to server side.
+
+
+
 ## General info
 
 ### Focus:ON is a productivity app that helps to focus on daily tasks. The app has two views:
 
 1. An overview page where the user can see how many pomodoro sessions and tasks she completed on a given day.
 2. A current day view where the user can define tasks for the day and set a pomodoro tracker.
+
 
 ## Technologies
 

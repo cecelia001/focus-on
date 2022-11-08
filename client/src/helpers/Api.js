@@ -81,7 +81,13 @@ class Api {
         return await this._doFetch(`/tasks/${userId}/${id}`, "DELETE");
     }
 
+    // /**
+    //  * POST (add Day)
+    //  **/
 
+    static async addDay(userId) {
+        return await this._doFetch(`/days/${userId}`, "POST");
+    }
 
     /**
      * Private method for internal use only

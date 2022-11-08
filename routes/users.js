@@ -43,5 +43,12 @@ router.get('/:userId', ensureSameUserP, async function(req, res, next) {
     }
 });
 
+/**
+ * Post new user.
+ * Register a new user.
+ **/
+
+
+
 
 module.exports = router;

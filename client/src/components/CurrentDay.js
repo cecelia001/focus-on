@@ -21,10 +21,10 @@ function CurrentDay(props) {
     try {
       let response = await fetch(`/days/${userId}/currentday/${id}`);
       if (response.ok) {
-        let currentDayData = await response.json();
+        let currentDayDatas = await response.json();
 
-        setCurrentDayData(currentDayData);
-        console.log(currentDayData);
+        setCurrentDayData(currentDayDatas);
+        
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -75,7 +75,7 @@ function CurrentDay(props) {
         p={6}
         fontSize="lg"
       >
-        <Link to="/">Go back to overview</Link>
+        <Link to="/focus/:userId"> Go back to overview</Link>
       </Button>
     </div>
   );

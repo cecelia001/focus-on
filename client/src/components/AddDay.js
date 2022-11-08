@@ -3,29 +3,27 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Grid, GridItem, Text } from "@chakra-ui/react";
 
+import Local from "../helpers/Local";
+import Api from "../helpers/Api";
+
 function AddDay(props) {
   const navigate = useNavigate();
 
-  async function insertDay() {
-    let options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+console.log("hello", props.overviewData);
 
-    try {
-      let response = await fetch("/days", options);
+  async function insertDay() {
+    let id = Local.getUserId()
+
+
+      let response = await Api.addDay(id);
+      
       if (response.ok) {
-        let newDay = await response.json();
-        let dayId = newDay[0].id;
+        // let newDay = await response.json();
+        let dayId = response.data[0].id;
         navigate(`/current/${dayId}`);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
-    } catch (err) {
-      console.log(`Network error: ${err.message}`);
-    }
   }
 
   return (

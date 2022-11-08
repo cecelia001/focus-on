@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
-const { ensureSameUserP } = require('../middleware/guards');
 
 // GET all days
 
@@ -11,7 +10,7 @@ router.get("/:userId/", async function (req, res, next) {
   try {
     let daysData = [];
 
-    let results = await db("SELECT * FROM days;");
+    let results = await db(`SELECT * FROM days WHERE user_id=${userId}`);
     let days = results.data;
 
     for (let date of days) {
@@ -44,7 +43,7 @@ router.get("/:userId/currentday/:id", async function (req, res, next) {
   let dayId = req.params.id;
   let userId = req.params.userId;
   try {
-    let results = await db(`SELECT * FROM days WHERE id=${dayId}`);
+    let results = await db(`SELECT * FROM days WHERE id=${dayId} AND user_id=${userId}`);
     // days is an object
     let days = results.data;
     if (days.length === 0) {
@@ -68,22 +67,23 @@ router.get("/:userId/currentday/:id", async function (req, res, next) {
 
 // POST new day
 
-router.post("/", async function (req, res, next) {
+router.post("/:userId/", async function (req, res, next) {
   let getDay = new Date();
   var dd = String(getDay.getDate()).padStart(2, "0");
   var mm = String(getDay.getMonth() + 1).padStart(2, "0");
   var yyyy = getDay.getFullYear();
   let today = dd + "." + mm + "." + yyyy;
+  let userId = req.params.userId;
 
   try {
-    let day = `SELECT * FROM days WHERE date="${today}"`;
+    let day = `SELECT * FROM days WHERE date="${today}" AND user_id=${userId}`;
     let dayExist = await db(day);
     if (dayExist.data.length !== 0) {
       res.send({ error: "Day already exists." });
     } else {
-      await db(`INSERT INTO days (date)
-      VALUES ("${today}")`);
-      let result = await db(`SELECT * FROM days WHERE date="${today}"`);
+      await db(`INSERT INTO days (date, user_id)
+      VALUES ("${today}", ${userId})`);
+      let result = await db(`SELECT * FROM days WHERE date="${today}" AND user_id=${userId}`);
       let days = result.data;
       res.status(201).send(days);
     }
