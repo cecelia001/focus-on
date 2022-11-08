@@ -1,4 +1,6 @@
 var express = require('express');
+const { BCRYPT_WORK_FACTOR } = require('../config');
+const bcrypt = require('bcrypt');
 var router = express.Router();
 const { ensureSameUser, ensureSameUserP } = require('../middleware/guards');
 const db = require("../model/helper");
@@ -43,9 +45,29 @@ router.get('/:userId', ensureSameUserP, async function(req, res, next) {
 });
 
 /**
- * Post new user.
+ * Post new user. (code already written in auth.js route)
  * Register a new user.
  **/
+
+//  router.post('/register', async function(req, res, next) {
+//     let { username, password, email} = req.body;
+//     let hashPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR)
+
+//     let sql = `
+//       INSERT INTO users (username, password, email)
+//       VALUES ('${username}', '${hashPassword}', '${email}')
+//   `;
+    
+//     try {
+//         await db(sql);
+//         let result = await db(`SELECT * FROM users`); 
+//         let users = result.data;
+//         res.status(201).send(users);
+//       } catch (err) {
+//         res.status(500).send({ error: err.message });
+//       }
+//     });
+
 
 
 

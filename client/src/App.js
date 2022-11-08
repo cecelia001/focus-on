@@ -21,6 +21,7 @@ import CurrentDay from "./components/CurrentDay";
 import LoginView from './views/LoginView';
 import ProfileView from './views/ProfileView';
 import Error404View from "./views/Error404View";
+import RegisterView from './views/RegisterView';
 
 function App() {
   
@@ -55,6 +56,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
+          <Route path="/register" element={<RegisterView
+                loginCb={(u, p) => doLogin(u, p)} 
+                loginError={loginErrorMsg} 
+              />} />
           <Route path="/focus/:userId" element={
             <PrivateRoute>
                 <Overview />

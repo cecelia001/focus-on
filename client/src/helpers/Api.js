@@ -27,6 +27,14 @@ class Api {
     }
 
     /**
+     * Register a new user
+     **/
+    
+    static async registerUser(newUserObj) {
+        return await this._doFetch('/register', 'POST', newUserObj);
+    }
+
+    /**
      * Get all users 
      **/
 

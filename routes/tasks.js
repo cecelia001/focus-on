@@ -49,7 +49,7 @@ router.post("/", ensureSameUser, async (req, res) => {
   `;
   try {
     await db(sql);
-    let result = await db(`SELECT * FROM tasks WHERE user_id = ${user_id}`);  //edited to add where clause
+    let result = await db(`SELECT * FROM tasks WHERE user_id = ${user_id}`);  
     let tasks = result.data;
     res.status(201).send(tasks);
   } catch (err) {
