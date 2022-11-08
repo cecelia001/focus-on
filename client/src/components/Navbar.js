@@ -48,7 +48,7 @@ function NavBar(props) {
             
               <MenuList bg={useColorModeValue('#4fa296', '#835dc7')} px={4}>
                 <MenuItem as="a" href="/" > Home </MenuItem>
-                <MenuItem as="a" href="/login" > Login </MenuItem>
+                <MenuItem as="a" href="/register" > Register </MenuItem>
               </MenuList>
             </Menu>
         

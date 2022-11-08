@@ -78,11 +78,11 @@ function RegisterView(props) {
 
         <div className="LoginView row">
                 
-                {
+                {/* {
                     props.loginError && (
                         <div className="alert alert-danger">{props.loginError}</div>
                     )
-                }
+                } */}
 
                 <form onSubmit={handleSubmit} >
 
@@ -128,7 +128,21 @@ function RegisterView(props) {
                         </InputGroup>
                     </Stack>
 
-                    <Button colorScheme='blue' mt="20px" type="submit" >Submit</Button>
+                    <Button 
+                    type="submit"
+                    borderWidth={1}
+                    borderColor="#FFECEF"
+                    borderRadius={"lg"}
+                    bg="#251B37"
+                    color="#FFCACA"
+                    _hover={{ background: "#372948" }}
+                    mt={4}
+                    mb={4}
+                    p={6}
+                    fontSize="lg"
+                    >Submit
+                    </Button>
+
                 </form>
         </div>
         </Container>

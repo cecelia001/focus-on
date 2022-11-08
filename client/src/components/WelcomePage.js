@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";                      
-import { Box, Container, Heading, Stack } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, Link, Stack } from '@chakra-ui/react'
 
 import { TimeIcon } from '@chakra-ui/icons';
 
@@ -18,6 +18,37 @@ function WelcomePage() {
         </Stack>
       </Stack>
     </Container>
+
+    <Button
+        borderWidth={1}
+        borderColor="#FFECEF"
+        borderRadius={"lg"}
+        bg="#251B37"
+        color="#FFCACA"
+        _hover={{ background: "#372948" }}
+        mt={4}
+        mb={4}
+        p={6}
+        fontSize="lg"
+      >
+        <Link as="a" href="/register"> Register</Link>
+      </Button>
+
+      <Button
+        borderWidth={1}
+        borderColor="#FFECEF"
+        borderRadius={"lg"}
+        bg="#251B37"
+        color="#FFCACA"
+        _hover={{ background: "#372948" }}
+        mt={4}
+        mb={4}
+        p={6}
+        fontSize="lg"
+      >
+        <Link as="a" href="/login"> Login</Link>
+      </Button>
+
   </Box>
 
   );
